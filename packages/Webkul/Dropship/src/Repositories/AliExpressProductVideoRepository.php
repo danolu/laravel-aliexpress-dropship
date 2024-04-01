@@ -47,6 +47,7 @@ class AliExpressProductVideoRepository extends Repository
         $aliExpressProductVideo = $this->findOneByField('url', $video);
 
         if ($aliExpressProductVideo) {
+
             if (is_numeric($index = $previousVideoIds->search($aliExpressProductVideo->product_video_id))) {
                 $previousVideoIds->forget($index);
             }
@@ -56,10 +57,10 @@ class AliExpressProductVideoRepository extends Repository
             Storage::put($path, file_get_contents($video));
 
             $productVideo = $this->productVideoRepository->create([
-                    'type'       => 'video',
-                    'path'       => $path,
-                    'product_id' => $product->id
-                ]);
+                'type'       => 'video',
+                'path'       => $path,
+                'product_id' => $product->id,
+            ]);
 
             $this->create([
                 'url'              => $video,

@@ -67,26 +67,26 @@ class AliExpressOrderRepository extends Repository
 
             if (! $aliExpressOrder) {
                 $aliExpressOrder = parent::create([
-                        'order_id' => $order->id
-                    ]);
+                    'order_id' => $order->id
+                ]);
             }
 
             $aliExpressOrderItem = $this->aliExpressOrderItemRepository->create([
-                    'ali_express_product_id' => $aliExpressProduct->id,
-                    'ali_express_order_id'   => $aliExpressOrder->id,
-                    'order_item_id'          => $item->id,
-                ]);
+                'ali_express_product_id' => $aliExpressProduct->id,
+                'ali_express_order_id'   => $aliExpressOrder->id,
+                'order_item_id'          => $item->id,
+            ]);
 
             if ($childItem = $item->child) {
                 $aliExpressChildProduct = $this->aliExpressProductRepository->findOneByField('product_id', $childItem->product->id);
 
                 if ($aliExpressChildProduct) {
                     $aliExpressChildOrderItem = $this->aliExpressOrderItemRepository->create([
-                            'ali_express_product_id' => $aliExpressChildProduct->id,
-                            'ali_express_order_id'   => $aliExpressOrder->id,
-                            'order_item_id'          => $childItem->id,
-                            'parent_id'              => $aliExpressOrderItem->id
-                        ]);
+                        'ali_express_product_id' => $aliExpressChildProduct->id,
+                        'ali_express_order_id'   => $aliExpressOrder->id,
+                        'order_item_id'          => $childItem->id,
+                        'parent_id'              => $aliExpressOrderItem->id
+                    ]);
 
                     $queryParams['wk_product_ids'][] = $aliExpressProduct->ali_express_product_id;
                     $queryParams['wk_product_qty'][] = $item->qty_ordered;

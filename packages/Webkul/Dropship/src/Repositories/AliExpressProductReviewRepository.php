@@ -44,13 +44,13 @@ class AliExpressProductReviewRepository extends Repository
     public function create(array $data)
     {
         $productReview = $this->productReviewRepository->create([
-                'product_id' => $data['product_id'],
-                'name'       => $data['name'],
-                'rating'     => $data['rating'],
-                'status'     => 'approved',
-                'title'      => ' ',
-                'comment'    => $data['comment'] ?? 'N/A',
-            ]);
+            'product_id' => $data['product_id'],
+            'name'       => $data['name'],
+            'rating'     => $data['rating'],
+            'status'     => 'approved',
+            'title'      => ' ',
+            'comment'    => $data['comment'] ?? 'N/A',
+        ]);
 
         $productReview->created_at = $data['created_at'];
         $productReview->updated_at = $data['updated_at'];
@@ -58,9 +58,9 @@ class AliExpressProductReviewRepository extends Repository
         $productReview->save();
 
         $aliExpressProductReview = parent::create([
-                'product_review_id'     => $productReview->id,
-                'ali_express_review_id' => $data['ali_express_review_id'],
-            ]);
+            'product_review_id'     => $productReview->id,
+            'ali_express_review_id' => $data['ali_express_review_id'],
+        ]);
 
         return $aliExpressProductReview;
     }
@@ -81,10 +81,10 @@ class AliExpressProductReviewRepository extends Repository
         $crawler = $this->getDomCrawler($this->getHtmlByUrl("https:" . $data['review_url']));
 
         $reviewParams = [
-                'productId'     => $crawler->filter('input#productId')->attr('value'),
-                'ownerMemberId' => $crawler->filter('input#ownerMemberId')->attr('value'),
-                'memberType'    => $crawler->filter('input#memberType')->attr('value')
-            ];
+            'productId'     => $crawler->filter('input#productId')->attr('value'),
+            'ownerMemberId' => $crawler->filter('input#ownerMemberId')->attr('value'),
+            'memberType'    => $crawler->filter('input#memberType')->attr('value')
+        ];
 
         $saveReviewCount = 0;
 
@@ -155,13 +155,13 @@ class AliExpressProductReviewRepository extends Repository
             $date = Carbon::parse($crawler->filter('.r-time')->text());
 
             $reviews[$count] = [
-                    'ali_express_review_id' => $crawler->filter('.feedback-id')->attr('value'),
-                    'name'                  => trim($crawler->filter('.user-name')->text()),
-                    'comment'               => trim($crawler->filter('.buyer-feedback')->text()),
-                    'rating'                => (5 / (100 / $rating)),
-                    'created_at'            => $date->format('Y-m-d H:i:s'),
-                    'updated_at'            => $date->format('Y-m-d H:i:s')
-                ];
+                'ali_express_review_id' => $crawler->filter('.feedback-id')->attr('value'),
+                'name'                  => trim($crawler->filter('.user-name')->text()),
+                'comment'               => trim($crawler->filter('.buyer-feedback')->text()),
+                'rating'                => (5 / (100 / $rating)),
+                'created_at'            => $date->format('Y-m-d H:i:s'),
+                'updated_at'            => $date->format('Y-m-d H:i:s')
+            ];
 
             $count++;
         });

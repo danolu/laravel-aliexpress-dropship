@@ -16,7 +16,6 @@ class CreateDropshipAliExpressProductImagesTable extends Migration
         Schema::create('dropship_ali_express_product_images', function (Blueprint $table) {
             $table->increments('id');
             $table->text('url');
-
             $table->integer('product_image_id')->unsigned();
             $table->foreign('product_image_id')->references('id')->on('product_images')->onDelete('cascade');
         });

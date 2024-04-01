@@ -65,6 +65,7 @@ class AliExpressProductRepository extends Repository
     public function create(array $data)
     {
         $demoArray = [];
+        
         DB::beginTransaction();
 
         try {

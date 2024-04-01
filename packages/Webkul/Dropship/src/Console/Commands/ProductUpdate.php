@@ -22,25 +22,15 @@ class ProductUpdate extends Command
     protected $description = 'Automatically updates AliExpress product information (eg. name, description, price and quantity)';
 
     /**
-     * AliExpressProductRepository object
-     *
-     * @var array
-    */
-    protected $aliExpressProductRepository;
-
-
-    /**
      * Create a new command instance.
      *
      * @param  Webkul\Dropship\Repositories\AliExpressProductRepository $aliExpressProductRepository
      * @return void
      */
     public function __construct(
-        AliExpressProductRepository $aliExpressProductRepository
+        protected AliExpressProductRepository $aliExpressProductRepository
     )
     {
-        $this->aliExpressProductRepository = $aliExpressProductRepository;
-
         parent::__construct();
     }
 
@@ -51,12 +41,17 @@ class ProductUpdate extends Command
      */
     public function handle()
     {
-        if (! core()->getConfigData('dropship.settings.auto_updation.quantity')
-            || ! core()->getConfigData('dropship.settings.auto_updation.price')) {
+        if (
+            ! core()->getConfigData('dropship.settings.auto_updation.quantity')
+            || ! core()->getConfigData('dropship.settings.auto_updation.price')
+        ) {
             return;
         }
 
-        $aliExpressProducts = $this->aliExpressProductRepository->findWhere(['parent_id' => null], ['id']);
+        $aliExpressProducts = $this->aliExpressProductRepository->findWhere(
+            ['parent_id' => null],
+            ['id']
+        );
 
         foreach ($aliExpressProducts as $aliExpressProduct) {
             $this->aliExpressProductRepository->update([], $aliExpressProduct->id);

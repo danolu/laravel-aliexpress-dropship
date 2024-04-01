@@ -118,13 +118,13 @@ class AliExpressAttributeRepository extends Repository
                         ];
                     }
                     $attribute = $this->attributeRepository->create(array_merge($attributeLabels, [
-                            'code' => $attributeCode,
-                            'type'            => 'select',
-                            'swatch_type'     => $attributeData['swatch_type'],
-                            'admin_name'      => substr($attributeData['title'], 0, -1),
-                            'is_configurable' => 1,
-                            'is_filterable'   => 1,
-                        ]));
+                        'code' => $attributeCode,
+                        'type'            => 'select',
+                        'swatch_type'     => $attributeData['swatch_type'],
+                        'admin_name'      => substr($attributeData['title'], 0, -1),
+                        'is_configurable' => 1,
+                        'is_filterable'   => 1,
+                    ]));
                 }
 
                 $aliExpressAttribute = $this->create([
@@ -151,6 +151,7 @@ class AliExpressAttributeRepository extends Repository
                         $label = substr($attributeData['title'], 0, -1);
 
                         $attributeLabels = [];
+                        
                         foreach (core()->getAllLocales() as $locale) {
                             $attributeLabels[$locale->code] = [
                                 'name' => $label

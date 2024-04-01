@@ -26,8 +26,8 @@ return [
                 'info'       => 'dropship::app.admin.system.token-info',
                 'type'       => 'text',
                 'validation' => 'required',
-            ]
-        ]
+            ],
+        ],
     ], [
         'key'  => 'dropship.settings.product',
         'name' => 'dropship::app.admin.system.product',
@@ -44,8 +44,8 @@ return [
                     ], [
                         'title' => 'dropship::app.admin.system.disabled',
                         'value' => 0,
-                    ]
-                ]
+                    ],
+                ],
             ], [
                 'name'       => 'default_channel',
                 'title'      => 'dropship::app.admin.system.default-channel',
@@ -89,8 +89,8 @@ return [
                 'type'       => 'text',
                 'value'      => 0,
                 'validation' => 'decimal|required',
-            ]
-        ]
+            ],
+        ],
     ], [
         'key'  => 'dropship.settings.product_price',
         'name' => 'dropship::app.admin.system.product-price',
@@ -142,8 +142,8 @@ return [
                 'validation'    => 'required|decimal',
                 'channel_based' => true,
                 'locale_based'  => true,
-            ]
-        ]
+            ],
+        ],
     ], [
         'key'  => 'dropship.settings.product_quantity',
         'name' => 'dropship::app.admin.system.product-quantity',
@@ -160,8 +160,8 @@ return [
                     ], [
                         'title' => 'dropship::app.admin.system.custom-quantity',
                         'value' => 2,
-                    ]
-                ]
+                    ],
+                ],
             ], [
                 'name'       => 'custom_quantity',
                 'title'      => 'dropship::app.admin.system.custom-quantity',
@@ -174,9 +174,8 @@ return [
                 'title'      => 'dropship::app.admin.system.default-inventory-source',
                 'type'       => 'select',
                 'repository' => 'Webkul\Dropship\Repositories\InventorySourceRepository@getInventorySources',
-
-            ]
-        ]
+            ],
+        ],
     ], [
         'key'  => 'dropship.settings.auto_updation',
         'name' => 'dropship::app.admin.system.auto-updation',

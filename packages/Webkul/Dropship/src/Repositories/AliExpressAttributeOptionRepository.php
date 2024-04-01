@@ -46,6 +46,7 @@ class AliExpressAttributeOptionRepository extends Repository
         $aliExpressAttributeRepository = app('Webkul\Dropship\Repositories\AliExpressAttributeRepository');
 
         foreach ($data as $key => $optionData) {
+            
             if ($aliExpressAttribute->attribute->swatch_type == 'image') {
                 $aliExpressAttributeOption = $this->findOneWhere([
                     'ali_express_attribute_option_id' => $optionData['optionid'],
@@ -57,10 +58,13 @@ class AliExpressAttributeOptionRepository extends Repository
                     'ali_express_swatch_name'         => $optionData['name'],
                 ]);
             }
+
             if (! $aliExpressAttributeOption) {
                 $attributeOption = null;
+
                 if ($aliExpressAttribute->attribute->swatch_type != 'image') {
                     $attributeOption = $this->attributeOptionRepository->getModel()::whereTranslation('label', $optionData['name'])->first();
+
                     if (! $attributeOption) {
                         $attributeOption = $this->attributeOptionRepository->findOneWhere([
                             'attribute_id' => $aliExpressAttribute->attribute_id,
@@ -89,8 +93,8 @@ class AliExpressAttributeOptionRepository extends Repository
 
                     if ($aliExpressAttribute->attribute->swatch_type == 'color') {
                         $this->attributeOptionRepository->update([
-                                'swatch_value' => $optionData['name']
-                            ], $attributeOption->id);
+                            'swatch_value' => $optionData['name']
+                        ], $attributeOption->id);
                     }
 
                     if ($aliExpressAttribute->attribute->swatch_type == 'image' && $optionData['img']) {
@@ -99,8 +103,8 @@ class AliExpressAttributeOptionRepository extends Repository
                         Storage::put($path, file_get_contents($optionData['img']));
 
                         $this->attributeOptionRepository->update([
-                                'swatch_value' => $path
-                            ], $attributeOption->id);
+                            'swatch_value' => $path
+                        ], $attributeOption->id);
                     }
                 }
 

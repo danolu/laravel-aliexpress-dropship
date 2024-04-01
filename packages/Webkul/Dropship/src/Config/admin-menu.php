@@ -17,5 +17,5 @@ return [
         'name'  => 'dropship::app.admin.layouts.orders',
         'route' => 'admin.dropship.orders.index',
         'sort'  => 2,
-    ]
+    ],
 ];

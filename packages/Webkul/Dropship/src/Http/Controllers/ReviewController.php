@@ -32,15 +32,15 @@ class ReviewController extends Controller
             $this->aliExpressProductReviewRepository->importReviews(request()->all());
 
             $response = response($callback . '(' . json_encode([
-                    'success' => true,
-                    'message' => 'Reviews Successfully Imported.',
-                    'product_id' => request()->input('product_id')
-                ]) . ')');
+                'success' => true,
+                'message' => 'Reviews Successfully Imported.',
+                'product_id' => request()->input('product_id')
+            ]) . ')');
         } catch(\Exception $e) {
             $response = response($callback . '(' . json_encode([
-                    'success' => false,
-                    'message' => $e->getMessage(),
-                ]) . ')');
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]) . ')');
         }
 
         $response->header('Content-Type', 'application/javascript');

@@ -18,9 +18,7 @@ class DropshipServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        include __DIR__ . '/../Http/admin-routes.php';
-
-        include __DIR__ . '/../Http/routes.php';
+        include __DIR__ . '/../Routes/web.php';
 
         $this->app->register(ModuleServiceProvider::class);
 

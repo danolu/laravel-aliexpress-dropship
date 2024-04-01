@@ -32,12 +32,12 @@ class ProductController extends Controller
             $this->validate(request(), [
                 'id' => 'required',
                 'name' => 'required',
-                'price' => 'required'
+                'price' => 'required',
             ]);
 
             $aliExpressProduct = $this->aliExpressProductRepository->findOneWhere([
-                    'ali_express_product_id' => request()->input('id'),
-                ]);
+                'ali_express_product_id' => request()->input('id'),
+            ]);
 
             if ($aliExpressProduct) {
                 $response = response($callback . '(' . json_encode([
@@ -48,16 +48,16 @@ class ProductController extends Controller
                 $aliExpressProduct = $this->aliExpressProductRepository->create(request()->all());
 
                 $response = response($callback . '(' . json_encode([
-                        'success' => true,
-                        'message' => 'Product Successfully Imported.',
-                        'product_id' => $aliExpressProduct->product_id
-                    ]) . ')');
+                    'success' => true,
+                    'message' => 'Product Successfully Imported.',
+                    'product_id' => $aliExpressProduct->product_id
+                ]) . ')');
             }
         } catch(\Exception $e) {
             $response = response($callback . '(' . json_encode([
-                    'success' => false,
-                    'message' => $e->getMessage(),
-                ]) . ')');
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]) . ')');
         }
 
         $response->header('Content-Type', 'application/javascript');
@@ -87,17 +87,17 @@ class ProductController extends Controller
             if (! $aliExpressProduct) {
 
                 $response = response($callback . '(' . json_encode([
-                        'success' => false,
-                        'message' => 'Product import error.',
-                    ]) . ')');
+                    'success' => false,
+                    'message' => 'Product import error.',
+                ]) . ')');
             } else {
                 $productVariant = $this->aliExpressProductRepository->createVariant($aliExpressProduct, request()->all());
 
                 $response = response($callback . '(' . json_encode([
-                        'success' => true,
-                        'message' => 'Product Successfully Imported.',
-                        'product_id' => $productVariant->parent_id
-                    ]) . ')');
+                    'success' => true,
+                    'message' => 'Product Successfully Imported.',
+                    'product_id' => $productVariant->parent_id
+                ]) . ')');
             }
 
         } catch(\Exception $e) {
