@@ -32,8 +32,8 @@ class ReviewController extends Controller
             $this->aliExpressProductReviewRepository->importReviews(request()->all());
 
             $response = response($callback . '(' . json_encode([
-                'success' => true,
-                'message' => 'Reviews Successfully Imported.',
+                'success'    => true,
+                'message'    => 'Reviews Successfully Imported.',
                 'product_id' => request()->input('product_id')
             ]) . ')');
         } catch(\Exception $e) {

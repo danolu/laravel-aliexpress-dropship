@@ -128,6 +128,7 @@ class OrderDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'title'  => trans('admin::app.datagrid.view'),
             'type'   => 'View',
             'method' => 'GET', // use GET request only for redirect purposes
             'route'  => 'admin.sales.orders.view',

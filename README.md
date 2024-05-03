@@ -44,11 +44,15 @@ Goto composer.json file and add following line under 'psr-4'
 ~~~
 composer dump-autoload
 ~~~
+
+~~~
 php artisan migrate
 ~~~
+
 ~~~
 php artisan route:cache
 ~~~
+
 ~~~
 php artisan vendor:publish --force
 

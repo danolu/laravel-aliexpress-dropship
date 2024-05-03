@@ -92,6 +92,7 @@ class ProductDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
+            'title'  => trans('admin::app.datagrid.edit'),
             'type'   => 'Edit',
             'method' => 'GET', // use GET request only for redirect purposes
             'route'  => 'admin.catalog.products.edit',
@@ -99,6 +100,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addAction([
+            'title'  => trans('admin::app.datagrid.delete'),
             'type'   => 'Delete',
             'method' => 'POST',
             'route'  => 'admin.catalog.products.delete',
@@ -108,6 +110,7 @@ class ProductDataGrid extends DataGrid
 
     public function prepareMassActions() {
         $this->addMassAction([
+            'title'  => trans('admin::app.datagrid.delete'),
             'type'   => 'delete',
             'label'  => trans('dropship::app.admin.datagrid.delete'),
             'action' => route('dropship.catalog.products.massdelete'),
