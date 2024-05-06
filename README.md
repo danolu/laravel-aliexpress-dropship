@@ -58,10 +58,15 @@ php artisan route:cache
 ~~~
 
 ~~~
+composer require laravel/helpers
+~~~
+
+~~~
 php artisan vendor:publish --force
 
 -> Enter the number before Webkul\Dropship\Providers\DropshipServiceProvider and then press enter to publish all assets and configurations.
 ~~~
+
 
 - Add the following line to the crontab for automatic product information updation (eg. Price and Quantity)
 
