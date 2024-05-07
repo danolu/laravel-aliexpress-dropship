@@ -25,8 +25,8 @@ class OrderDataGrid extends DataGrid
                 })
                 ->leftjoin('order_items', 'aliexpress_order_items.order_item_id', '=', 'order_items.id')
                 ->select('orders.id', 'dropship_ali_express_orders.order_id', 'dropship_ali_express_orders.ali_express_add_cart_url', 'order_items.base_total', 'dropship_ali_express_orders.created_at', 'orders.status', 'orders.base_grand_total', 'dropship_ali_express_orders.is_placed')
-                ->addSelect(DB::raw('CONCAT(orders.customer_first_name, " ", orders.customer_last_name) as customer_name, orders.customer_email'));
-
+                ->addSelect(DB::raw('CONCAT(orders.customer_first_name, " ", orders.customer_last_name) as customer_name, orders.customer_email'))
+                ->groupBy('orders.id');
 
         $this->addFilter('customer_name', DB::raw('CONCAT(orders.customer_first_name, " ", orders.customer_last_name)'));
         $this->addFilter('created_at', 'dropship_ali_express_orders.created_at');
